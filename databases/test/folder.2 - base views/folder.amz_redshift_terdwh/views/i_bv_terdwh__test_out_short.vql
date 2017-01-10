@@ -1,0 +1,11 @@
+﻿CREATE OR REPLACE INTERFACE VIEW i_bv_terdwh__test_out_short (
+        a1:text
+    )
+    SET IMPLEMENTATION bv_terdwh__test_out(
+        a1 = fqfd    
+)
+    FOLDER = '/2 - base views/amz_redshift_terdwh';
+
+ALTER VIEW i_bv_terdwh__test_out_short
+ LAYOUT (bv_terdwh__test_out = [455, 109, 200, 46]);
+

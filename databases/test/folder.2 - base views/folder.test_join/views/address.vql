@@ -1,0 +1,33 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC address
+    FOLDER = '/2 - base views/test_join'
+    DATASOURCENAME=ds_ar_terdwh
+    CATALOGNAME = '${databases.test.folder.2 - base views.folder.test_join.views.jdbc.address.CATALOGNAME}'
+    SCHEMANAME = '${databases.test.folder.2 - base views.folder.test_join.views.jdbc.address.SCHEMANAME}'
+    RELATIONNAME='address' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.Integer' (OPT) (sourcetyperadix='10', sourcetypename='int4', sourcetypeid='4', sourcetypedecimals='0', sourcetypesize='10')  SORTABLE,
+        address = 'address' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='varchar', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='255')  SORTABLE,
+        city = 'city' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='varchar', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='255')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE address I18N be_gmt (
+        id:int (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10', sourcetypeid = '4'), 
+        address:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '255', sourcetypeid = '12'), 
+        city:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '255', sourcetypeid = '12')
+    )
+    FOLDER = '/2 - base views/test_join'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD address(
+        I18N be_gmt
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD address (any) OPT ANY
+             ADD city (any) OPT ANY
+        )
+        OUTPUTLIST (address, city, id
+        )
+        WRAPPER (jdbc address)
+    );
+

@@ -1,0 +1,10 @@
+﻿/databases/test/folder.3 - derived views/3 - derived views.vql
+/databases/test/folder.3 - derived views/folder.test_join/test_join.vql
+/databases/test/folder.2 - base views/2 - base views.vql
+/databases/test/folder.2 - base views/folder.test_join/test_join.vql
+/maps/i18n/be_gmt.vql
+/databases/test/folder.1 - data sources/1 - data sources.vql
+/databases/test/folder.1 - data sources/folder.redshift/redshift.vql
+/databases/test/folder.1 - data sources/folder.redshift/datasources/jdbc/ds_ar_terdwh.vql
+/databases/test/folder.2 - base views/folder.test_join/views/address.vql
+/databases/test/folder.2 - base views/folder.test_join/views/persons.vql

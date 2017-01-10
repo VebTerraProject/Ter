@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW address_j_persons FOLDER = '/3 - derived views/test_join' AS SELECT address.address AS address, address.city AS city, persons.lastname AS lastname FROM address AS address INNER JOIN persons AS persons ON address.id = persons.addressid ;
+
+ALTER VIEW address_j_persons
+ LAYOUT (address = [20, 20, 200, 86], persons = [250, 20, 200, 86]);
+

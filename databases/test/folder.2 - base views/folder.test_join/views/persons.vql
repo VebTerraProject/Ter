@@ -1,0 +1,33 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC persons
+    FOLDER = '/2 - base views/test_join'
+    DATASOURCENAME=ds_ar_terdwh
+    CATALOGNAME = '${databases.test.folder.2 - base views.folder.test_join.views.jdbc.persons.CATALOGNAME}'
+    SCHEMANAME = '${databases.test.folder.2 - base views.folder.test_join.views.jdbc.persons.SCHEMANAME}'
+    RELATIONNAME='persons' 
+    OUTPUTSCHEMA (
+        personid = 'personid' :'java.lang.Integer' (OPT) (sourcetyperadix='10', sourcetypename='int4', sourcetypeid='4', sourcetypedecimals='0', sourcetypesize='10')  SORTABLE,
+        addressid = 'addressid' :'java.lang.Integer' (OPT) (sourcetyperadix='10', sourcetypename='int4', sourcetypeid='4', sourcetypedecimals='0', sourcetypesize='10')  SORTABLE,
+        lastname = 'lastname' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='varchar', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='255')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE persons I18N be_gmt (
+        personid:int (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10', sourcetypeid = '4'), 
+        addressid:int (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10', sourcetypeid = '4'), 
+        lastname:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '255', sourcetypeid = '12')
+    )
+    FOLDER = '/2 - base views/test_join'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD persons(
+        I18N be_gmt
+        CONSTRAINTS (
+             ADD personid (any) OPT ANY
+             ADD addressid (any) OPT ANY
+             ADD lastname (any) OPT ANY
+        )
+        OUTPUTLIST (addressid, lastname, personid
+        )
+        WRAPPER (jdbc persons)
+    );
+
